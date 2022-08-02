@@ -44,7 +44,7 @@ def install(blender_exec, kernel_dir, kernel_name):
     # check version
     supported_py_version = (3, 7)
     current_py_version = (sys.version_info.major, sys.version_info.minor)
-    if current_py_version > supported_py_version:
+    if current_py_version < supported_py_version:
         message = """
         Current python interpreter version is not {}.{}!
         blender_notebook will link pip packages installed in this interpreter to the 
