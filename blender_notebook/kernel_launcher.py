@@ -41,7 +41,11 @@ def main():
 
         blender_executable = blender_config['blender_executable']
         print(tempdirname)
-        subprocess.run([blender_executable, "-P", str(runtime_kernel_path)])
+        try:
+            subprocess.run([blender_executable, "-P", str(runtime_kernel_path)])
+        except KeyboardInterrupt:
+            print("caught a keyboard interrupt, going to ignore it")
+            
         
 
 main()
