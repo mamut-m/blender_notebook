@@ -37,7 +37,8 @@ def cli():
 @click.option('--blender-exec', required=True, type=str, help="Path the blender executable")
 @click.option('--kernel-dir', default=None, type=str, help="Path to jupyter's kernels directory")
 @click.option('--kernel-name', default='blender', type=str, help="Name of the kernel to be installed")
-def install(blender_exec, kernel_dir, kernel_name):
+@click.option('--no-user-local-modules', default=False, type=bool, help="do not start kernel with user local python path")
+def install(blender_exec, kernel_dir, kernel_name, no_user_local_modules):
     """
     Install kernel to jupyter notebook
     """
@@ -85,11 +86,15 @@ def install(blender_exec, kernel_dir, kernel_name):
     shutil.copyfile(kernel_py_path, kernel_py_dst)
     shutil.copyfile(kernel_launcher_py_path, kernel_launcher_py_dst)
     kernel_launcher_py_dst.chmod(0o755)
-
+    if not no_user_local_modules
+    user_local_path=str(pathlib.Path("~/.local").expanduser())
     # find python path
     python_path = list()
     for path in sys.path:
         if pathlib.Path(path).is_dir():
+            if no_user_local_modules:
+                if str(path).startswith(user_local_path):
+                    continue
             python_path.append(str(path))
 
     # dump jsons
