@@ -37,7 +37,7 @@ def cli():
 @click.option('--blender-exec', required=True, type=str, help="Path the blender executable")
 @click.option('--kernel-dir', default=None, type=str, help="Path to jupyter's kernels directory")
 @click.option('--kernel-name', default='blender', type=str, help="Name of the kernel to be installed")
-@click.option('--no-user-local-modules', default=False, type=bool, help="do not start kernel with user local python path")
+@click.option('--no-user-local-modules', is_flag=True, show_default=True, default=False, help="do not start kernel with user local python path")
 def install(blender_exec, kernel_dir, kernel_name, no_user_local_modules):
     """
     Install kernel to jupyter notebook
