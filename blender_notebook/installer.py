@@ -86,7 +86,7 @@ def install(blender_exec, kernel_dir, kernel_name, no_user_local_modules):
     shutil.copyfile(kernel_py_path, kernel_py_dst)
     shutil.copyfile(kernel_launcher_py_path, kernel_launcher_py_dst)
     kernel_launcher_py_dst.chmod(0o755)
-    if not no_user_local_modules
+    
     user_local_path=str(pathlib.Path("~/.local").expanduser())
     # find python path
     python_path = list()
