@@ -87,14 +87,15 @@ def install(blender_exec, kernel_dir, kernel_name, no_user_local_modules):
     shutil.copyfile(kernel_launcher_py_path, kernel_launcher_py_dst)
     kernel_launcher_py_dst.chmod(0o755)
     
-    user_local_path=str(pathlib.Path("~/.local").expanduser())
+    user_local_paths=[str(pathlib.Path("~/"+user_path).expanduser()) for user_path in [".local/", ".config/blender/"]]
     # find python path
     python_path = list()
     for path in sys.path:
         if pathlib.Path(path).is_dir():
             if no_user_local_modules:
-                if str(path).startswith(user_local_path):
-                    continue
+                for user_path in user_local_paths:
+                    if str(path).startswith(user_path):
+                        continue
             python_path.append(str(path))
 
     # dump jsons
